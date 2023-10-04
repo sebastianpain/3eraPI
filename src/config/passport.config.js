@@ -2,11 +2,15 @@ import passport from "passport";
 import local from 'passport-local';
 import Users from "../dao/dbManagers/users.js";
 import { createHash, isValidPassword} from "../utils.js";
+import jwt , {ExtractJwt} from 'passport-jwt'
+import config from "./config.js";
+
+
 
 
 const LocalStrategy = local.Strategy;
 const userService = new Users();
-
+const JWTStrategy = jwt.Strategy
 const initializePassport = async() =>{
     passport.use('register',new LocalStrategy({passReqToCallback:true,usernameField:'email',session:false},
     async(req,email,password,done)=>{
@@ -45,6 +49,16 @@ const initializePassport = async() =>{
         }catch(err){
             return done(err);
         }
+    }))
+    passport.use('current', new JWTStrategy({
+        jwtFromRequest:ExtractJwt.fromExtractors([cookieExtractor]),
+        secretOrKey:config.jwt.SECRET,
+
+    }, async(jwt_payload,done)=>{ 
+        try{
+            return done(null,jwt_payload)
+        }catch(error){
+        return done (error)}
     }))
 
     passport.serializeUser((user,done)=>{
