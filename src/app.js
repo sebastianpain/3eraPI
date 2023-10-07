@@ -1,5 +1,3 @@
-
-
 import express  from "express";
 import __dirname from "./utils.js";
 
@@ -13,14 +11,14 @@ import mongoose from "mongoose";
 
 import passport from "passport";
 import initializePassport from "./config/passport.config.js";
-import cookieParser from 'cookie-parser'
-import  config  from "./config/config.js";
+import cookieParser from 'cookie-parser';
+import  config  from './config/config.js';
 
 const app = express();
-const PORT=config.mongo.PORT;
+const PORT= config.mongo.PORT
 
-mongoose.set('strictQuery',false)
-const connection= mongoose.connect(config.mongo.URL);
+mongoose.set('strictQuery',false) 
+const connection = mongoose.connect(config.mongo.URL);
 
 app.engine('handlebars',handlebars.engine());
 app.set('views',__dirname+'/views')
@@ -35,7 +33,7 @@ app.use(cookieParser());
 
 app.use('/',viewRouter)
 app.use('/api/courses',coursesRouter)
-app.use('/api/users',usersRouter)
+app.use('/api/users',usersRouter) 
 app.use('/api/session',sessionRouter)
 
 const server = app.listen(PORT,()=>console.log("Server Arriba"))

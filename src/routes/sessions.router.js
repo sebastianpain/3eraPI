@@ -1,6 +1,4 @@
-import {
-    Router
-} from "express";
+import { Router } from "express";
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import sessionController from '../controllers/sesions.controller.js';

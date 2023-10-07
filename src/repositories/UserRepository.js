@@ -9,7 +9,7 @@ export default class UserRopository{
 
     }
     getUserById=(param)=>{
-        return this.dao.get.getBy(id)
+        return this.dao.getById(param)
     };
     createUser=(user)=>{
         return this.dao.saveUser(user)

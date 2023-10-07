@@ -20,16 +20,16 @@ const login = (req, res) => {
         role: req.user.role,
         email: req.user.email,
     };
-    const token = jwt.sign(serializedUser, 'CoderSecret', {
+    const token = jwt.sign(serializedUser,config.jwt.SECRET, {
             expiresIn: "1h"
         });
-        res.cookie("coderCookie", token, {
+        res.cookie(config.jwt.COOKIE, token, {
             maxAge: 3600000
         })
         .send({
             status: "success",
             payload: serializedUser
-        })
+        });
 
 }
 const failedLogin=(req,res)=>{

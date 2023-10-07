@@ -8,13 +8,13 @@ export default class CoursesRopository{
         return this.dao.getAll();
 
     }
-    getCourseById=()=>{
-        return this.dao.get.getBy(id)
+    getCourseById=(id)=>{
+        return this.dao.getBy(id)
     };
     createCourse=(course)=>{
         return this.dao.saveCourses(course)
     }
-updateCourse=()=>{
+updateCourse=(id,course)=>{
     return this.dao.updateCourse(id,course)
 }
 
