@@ -10,7 +10,7 @@ router.get('/', async (req,res)=>{
     let users = await usersManager.getAll();
     if(!users) return res.status(500).send({status:"error",error:"Couldn't get users due to internal error"})
     res.send({status:"success",payload:users})
-})
+});
 
 router.post('/',async(req,res)=>{
     let {first_name,last_name,dni,email,birthDate,gender,password} = req.body;
@@ -44,5 +44,16 @@ router.post('/:uid/courses/:cid',async(req,res)=>{
     await coursesManager.updateCourse(cid,course);
     res.send({status:"success",message:"User added to course"})
 })
+router.get('/test',(req,res)=>{
+    let first_name = faker.name.firstName();
+    let last_name = faker.name.lastName();
+    let email = faker.internet.email();
+    let password = faker.internet.password();
+    res.send({first_name,last_name,email,password})
+})
+router.post('api/users/:uid/documents',(req,res)=>{
 
+})
+ 
+  
 export default router;

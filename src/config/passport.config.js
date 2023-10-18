@@ -9,8 +9,9 @@ import config from "./config.js";
 
 
 const LocalStrategy = local.Strategy;
-
+const userService=new Users();
 const JWTStrategy = jwt.Strategy
+
 
 const initializePassport = async() =>{
     passport.use('register',new LocalStrategy({passReqToCallback:true,usernameField:'email',session:false},
@@ -59,25 +60,26 @@ const initializePassport = async() =>{
         try{
             return done(null,jwt_payload)
         }catch(error){
-        return done (error)}
-    }))
+            return done (error)}
+        }))
+        
+        
+        passport.serializeUser((user,done)=>{
+            done(null,user._id)
+        })
+        
+        passport.deserializeUser(async(id,done)=>{
+            let result = await userService.findOne({_id:id})
+            return done(null,result);
+        })
+    }
+    const cookieExtractor = req =>{ 
+    let token = null; 
+    if (req && req.cookies){
+        token = req.cookies[config.jwt.COOKIE]
+    }
+        return token;
+    }
     
     
-    passport.serializeUser((user,done)=>{
-        done(null,user._id)
-    })
-    
-    passport.deserializeUser(async(id,done)=>{
-        let result = await userService.findOne({_id:id})
-        return done(null,result);
-    })
-}
-const cookieExtractor = req =>{ 
-let token = null;
-if (req && req.cookies){
-    token = req.cookies[config.jwt.COOKIE]
-}
-    return token;
-}
-
-export default initializePassport;
+    export default initializePassport;

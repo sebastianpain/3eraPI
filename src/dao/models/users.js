@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import { userService } from '../../repositories/services.js';
+import { isAsyncFunction } from 'util/types';
 
 const userCollection = 'Users';
 
+  
 const usersSchema = new mongoose.Schema({
     first_name:{
         type:String,
@@ -27,9 +31,7 @@ const usersSchema = new mongoose.Schema({
         enum:["M","F"]
     },
     role:{
-        type:String,
-        enum: ["student","teacher"],
-        default:'student'
+        type: String, enum: ['user', 'premium', 'admin'], default: 'user',
     },
     courses:{
         type:[
@@ -39,7 +41,8 @@ const usersSchema = new mongoose.Schema({
             }
         ],
         default:[]
-    }
+    },
+
 })
 
 export const userModel = mongoose.model(userCollection,usersSchema);

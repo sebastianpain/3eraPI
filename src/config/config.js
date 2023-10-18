@@ -5,7 +5,7 @@ dotenv.config();
 export default{
     mongo:{
         URL: process.env.MONGO_URL,
-        PORT: process.env.PORT || 8080
+        PORT: process.env.PORT 
 
     },
     mailing:{

@@ -5,10 +5,10 @@ import sessionController from '../controllers/sesions.controller.js';
 
 const router = Router();
 
-router.post('/register', passport.authenticate('register', {
+router.post('/register', passport.authenticate("register", {
         passReqToCallback: true,
         session: false,
-        failureRedirect: 'api/sessions/failedRegister',
+        failureRedirect: "api/sessions/failedRegister",
         failureMessage: true,
     }),
     sessionController.register
@@ -26,6 +26,7 @@ router.post('/login', passport.authenticate('login', {
 );
 
 router.get("failedLogin", sessionController.failedLogin);
+
 router.get("/current", passport.authenticate('current', {
         session: false
     }),
