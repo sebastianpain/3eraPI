@@ -17,6 +17,7 @@ const productsSchema = mongoose.Schema({
     },
     owner:{
         name:String,
+        default:"admin",
         type:[
             {
                 type:mongoose.SchemaTypes.ObjectId,

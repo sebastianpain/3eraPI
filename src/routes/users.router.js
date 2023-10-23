@@ -6,6 +6,8 @@ const usersManager = new Users();
 const coursesManager = new Courses();
 const router = Router();
 
+
+
 router.get('/', async (req,res)=>{
     let users = await usersManager.getAll();
     if(!users) return res.status(500).send({status:"error",error:"Couldn't get users due to internal error"})
@@ -54,6 +56,8 @@ router.get('/test',(req,res)=>{
 router.post('api/users/:uid/documents',(req,res)=>{
 
 })
+
+
  
   
 export default router;

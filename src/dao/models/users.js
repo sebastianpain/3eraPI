@@ -1,7 +1,6 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import { userService } from '../../repositories/services.js';
-import { isAsyncFunction } from 'util/types';
+
 
 const userCollection = 'Users';
 
