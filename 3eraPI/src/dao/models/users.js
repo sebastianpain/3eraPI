@@ -32,10 +32,6 @@ const usersSchema = new mongoose.Schema({
     role:{
         type: String, enum: ['user', 'premium', 'admin'], default: 'user',
     },
-    canCreateProducts: {
-        type: Boolean,
-        default: false,
-    },
     courses:{
         type:[
             {
